@@ -507,6 +507,13 @@ table.delivery-table th {
   font-style: italic;
 }
 
+.small-note {
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  margin-top: 2rem;
+  text-align: center;
+}
+
 /* Get involved / CTA */
 .cta-band {
   background: var(--color-green-deep);
