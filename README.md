@@ -8,9 +8,8 @@ Built per [docs/TOR_website_kyrgyz_publishing.md](docs/TOR_website_kyrgyz_publis
 
 ```
 /index.html          → redirects to /en/
-/en/  /ky/  /ru/      → one folder per locale, identical page structure
-                        (English is fully built; ky/ru are placeholders
-                        ready for translation)
+/en/  /ky/  /ru/      → one folder per locale, identical page structure,
+                        all three fully translated
 /css/style.css        → single shared stylesheet
 /js/main.js           → single shared script (mobile menu, demo-video state)
 /assets/team/         → founder photos
@@ -32,5 +31,7 @@ static host.
   `/assets/downloads/` using the filenames already referenced in the HTML,
   then flip each download link's `data-available="false"` to `"true"`
   in `about-books.html` (all three locales) to activate it.
-- Kyrgyz and Russian translations (marked `[…] translation pending` throughout
-  `/ky/` and `/ru/`)
+
+Kyrgyz and Russian copy is fully translated throughout `/ky/` and `/ru/`.
+Machine-assisted; a native-speaker pass before launch is recommended,
+especially for the Kyrgyz pages.
