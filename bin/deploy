@@ -1,0 +1,51 @@
+#!/bin/sh
+# Deploy the static site to the VPS.
+# Usage: bin/deploy
+#
+# Packages the working tree (minus .git, docs, bin, dev-only files) and
+# streams it to the server over SSH via tar — no rsync needed on either
+# end. Overwrites the remote app directory with exactly what's here
+# locally, fixes permissions so nginx can read it, then does a quick
+# smoke test against the deployed vhost.
+#
+# Content-only changes never need an nginx reload (it reads files off
+# disk per-request) — only editing an nginx *config* does.
+
+set -eu
+
+REMOTE_USER="deploy"
+REMOTE_HOST="79.133.56.54"
+REMOTE_PATH="/opt/apps/kyrgyz_publishing"
+VHOST="kyrgyzbooks.kg"
+
+DIR="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$DIR"
+
+echo "Deploying $DIR -> $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH"
+
+tar --exclude='.git' \
+    --exclude='docs' \
+    --exclude='bin' \
+    --exclude='serve.sh' \
+    --exclude='.gitignore' \
+    --exclude='.DS_Store' \
+    -czf - . \
+  | ssh -o BatchMode=yes "$REMOTE_USER@$REMOTE_HOST" "
+      set -e
+      find '$REMOTE_PATH' -mindepth 1 -delete
+      tar -xzf - -C '$REMOTE_PATH'
+      find '$REMOTE_PATH' -type d -exec chmod 755 {} \;
+      find '$REMOTE_PATH' -type f -exec chmod 644 {} \;
+    "
+
+echo "Files synced. Smoke-testing..."
+
+STATUS="$(ssh -o BatchMode=yes "$REMOTE_USER@$REMOTE_HOST" \
+  "curl -s -o /dev/null -w '%{http_code}' -H 'Host: $VHOST' http://localhost/ky/index.html")"
+
+if [ "$STATUS" = "200" ]; then
+  echo "Deploy OK — https://$VHOST/ (ky/index.html returned 200)"
+else
+  echo "Deploy finished but smoke test returned HTTP $STATUS — check manually." >&2
+  exit 1
+fi
