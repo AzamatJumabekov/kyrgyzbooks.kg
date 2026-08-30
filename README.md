@@ -24,14 +24,22 @@ static host.
 ## Known placeholders to replace before launch
 
 - Publisher/site logo (currently a text wordmark)
-- Real contact email (`hello@publisher.example`)
-- Purchase-channel links on the Where to Buy page
-- Shipping cost/time table on the Price & Delivery page
+- New cover image for *Animals of Kyrgyzstan* — the client's revision notes said one
+  would be supplied separately; no file has been received yet, so the original cover
+  is still in place.
 - The two book demonstration videos — drop the `.mp4` files into
   `/assets/downloads/` using the filenames already referenced in the HTML,
   then flip each download link's `data-available="false"` to `"true"`
   in `about-books.html` (all three locales) to activate it.
 
+Contact throughout the site now routes to Instagram DM (`@4inderella`) on the Where to
+Buy page and WhatsApp (`+996 771 305 551`) on the Get Involved page — no more
+placeholder email. The Price & Delivery page was removed at the client's request; the
+only pricing figure left on the site is the "retail price from 1,700 KGS" note on the
+Where to Buy page.
+
 Kyrgyz and Russian copy is fully translated throughout `/ky/` and `/ru/`.
 Machine-assisted; a native-speaker pass before launch is recommended,
 especially for the Kyrgyz pages.
+
+See `docs/revisions/` for the structured client revision notes this content is based on.
