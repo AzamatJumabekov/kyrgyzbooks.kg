@@ -40,8 +40,7 @@ tar --exclude='.git' \
 
 echo "Files synced. Smoke-testing..."
 
-STATUS="$(ssh -o BatchMode=yes "$REMOTE_USER@$REMOTE_HOST" \
-  "curl -s -o /dev/null -w '%{http_code}' -H 'Host: $VHOST' http://localhost/ky/index.html")"
+STATUS="$(curl -s -o /dev/null -w '%{http_code}' --max-time 10 "https://$VHOST/ky/index.html")"
 
 if [ "$STATUS" = "200" ]; then
   echo "Deploy OK — https://$VHOST/ (ky/index.html returned 200)"
