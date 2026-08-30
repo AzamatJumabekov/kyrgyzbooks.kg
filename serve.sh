@@ -7,12 +7,12 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 
 cd "$DIR" || exit 1
 
-URL="http://localhost:$PORT/en/index.html"
+URL="http://localhost:$PORT/ky/index.html"
 LAN_IP="$(ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1 2>/dev/null)"
 
 echo "Serving $DIR"
 echo "  Local:   $URL"
-[ -n "$LAN_IP" ] && echo "  Network: http://$LAN_IP:$PORT/en/index.html"
+[ -n "$LAN_IP" ] && echo "  Network: http://$LAN_IP:$PORT/ky/index.html"
 
 ( sleep 1 && command -v open >/dev/null 2>&1 && open "$URL" ) &
 
