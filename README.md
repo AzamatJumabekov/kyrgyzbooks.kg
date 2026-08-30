@@ -7,7 +7,7 @@ Built per [docs/TOR_website_kyrgyz_publishing.md](docs/TOR_website_kyrgyz_publis
 ## Structure
 
 ```
-/index.html          → redirects to /en/
+/index.html          → redirects to /ky/ (default locale)
 /en/  /ky/  /ru/      → one folder per locale, identical page structure,
                         all three fully translated
 /css/style.css        → single shared stylesheet
@@ -24,9 +24,6 @@ static host.
 ## Known placeholders to replace before launch
 
 - Publisher/site logo (currently a text wordmark)
-- New cover image for *Animals of Kyrgyzstan* — the client's revision notes said one
-  would be supplied separately; no file has been received yet, so the original cover
-  is still in place.
 - The two book demonstration videos — drop the `.mp4` files into
   `/assets/downloads/` using the filenames already referenced in the HTML,
   then flip each download link's `data-available="false"` to `"true"`
